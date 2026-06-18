@@ -36,7 +36,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"ideal",
-"speed": 7.0
+"speed": 8.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3smsa"]
@@ -44,6 +44,7 @@ radius = 5.0
 height = 18.0
 
 [node name="Player" type="CharacterBody2D" unique_id=8528514]
+collision_layer = 128
 script = ExtResource("1_cvnsp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=992899121]
@@ -51,8 +52,15 @@ position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_x3wgy")
 animation = &"ideal"
 autoplay = "ideal"
-frame_progress = 0.7785765
+frame_progress = 0.3856094
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=942810697]
+z_index = 5
 position = Vector2(0, -9)
 shape = SubResource("CapsuleShape2D_3smsa")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1555908871]
+position = Vector2(43, -46)
+zoom = Vector2(4, 4)
+position_smoothing_enabled = true
+position_smoothing_speed = 7.0
