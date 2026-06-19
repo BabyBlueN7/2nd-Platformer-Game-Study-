@@ -46,6 +46,8 @@ height = 18.0
 [node name="Player" type="CharacterBody2D" unique_id=8528514]
 collision_layer = 128
 script = ExtResource("1_cvnsp")
+jump_buffer_time = 0.15
+coyote_time = 0.15
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=992899121]
 position = Vector2(0, -12)
@@ -62,5 +64,7 @@ shape = SubResource("CapsuleShape2D_3smsa")
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1555908871]
 position = Vector2(43, -46)
 zoom = Vector2(4, 4)
+limit_bottom = 110
+limit_smoothed = true
 position_smoothing_enabled = true
 position_smoothing_speed = 7.0
