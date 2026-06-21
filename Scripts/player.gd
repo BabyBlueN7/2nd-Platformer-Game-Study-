@@ -6,6 +6,8 @@ const JUMP_VELOCITY = -300.0
 
 @export var jump_buffer_time: float = 0.1
 @export var coyote_time: float = 0.1
+@onready var animated_sprite = $AnimatedSprite2D
+
 
 var jump_buffer_timer: float = 0.0
 var coyote_timer: float = 0.0
@@ -36,9 +38,25 @@ func _physics_process(delta: float) -> void:
 		coyote_timer = 0.0
 
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
+	# Get the input direction 
 	var direction := Input.get_axis("LEFT", "RIGHT")
+	
+	#flip spirte
+	if direction > 0:
+		animated_sprite.flip_h = false
+	elif direction < 0:
+		animated_sprite.flip_h = true
+	
+	#play animation
+	if is_on_floor():
+		if direction == 0:
+			animated_sprite.play("ideal")
+		else:
+			animated_sprite.play("run")
+	else:
+		animated_sprite.play("jump")
+
+	# apply movement
 	if direction:
 		velocity.x = direction * SPEED
 	else:
