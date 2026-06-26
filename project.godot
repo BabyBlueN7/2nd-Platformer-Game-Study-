@@ -23,6 +23,10 @@ buses/default_bus_layout="uid://dt260dpf85uek"
 
 Music="*uid://cuxqikkel687q"
 
+[display]
+
+window/stretch/scale_mode="integer"
+
 [input]
 
 LEFT={
@@ -50,8 +54,11 @@ JUMP={
 [physics]
 
 3d/physics_engine="Jolt Physics"
+2d/stretch/mode="disabled"
 
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
+2d/snap/snap_2d_transforms_to_pixel=true
+2d/snap/snap_2d_vertices_to_pixel=true
