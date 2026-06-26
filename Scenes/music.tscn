@@ -2,7 +2,7 @@
 
 [ext_resource type="AudioStream" uid="uid://bkucd3o6u2pm7" path="res://Audio/Music/Sweetwater.mp3" id="1_fbmny"]
 
-[node name="Music" type="AudioStreamPlayer2D" unique_id=646169580]
+[node name="Music" type="AudioStreamPlayer" unique_id=1947372208]
 stream = ExtResource("1_fbmny")
 autoplay = true
 bus = &"Music"
