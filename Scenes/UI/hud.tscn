@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://dd2b3vcm6unv6"]
+
+[ext_resource type="Script" uid="uid://b3j0ax8bk65ld" path="res://Scripts/hud.gd" id="1_ny26j"]
+[ext_resource type="Texture2D" uid="uid://csnqqtni7pyoe" path="res://Texture/Heart_Health_Bar.png" id="1_sprlj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ny26j"]
+atlas = ExtResource("1_sprlj")
+region = Rect2(0, 0, 24, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fdl0h"]
+atlas = ExtResource("1_sprlj")
+region = Rect2(0, 16, 24, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8glcj"]
+atlas = ExtResource("1_sprlj")
+region = Rect2(0, 32, 24, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vsu76"]
+atlas = ExtResource("1_sprlj")
+region = Rect2(0, 48, 24, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ux5h0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ny26j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fdl0h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8glcj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vsu76")
+}],
+"loop": false,
+"name": &"default",
+"speed": 4.0
+}]
+
+[node name="HUD" type="Control" unique_id=6132361]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_ny26j")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1738565374]
+sprite_frames = SubResource("SpriteFrames_ux5h0")
+frame = 3
+frame_progress = 1.0

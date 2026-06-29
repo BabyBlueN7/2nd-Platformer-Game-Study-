@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cl1arg8kn74tv" path="res://Scripts/slime.gd" id="1_aiwxb"]
 [ext_resource type="Texture2D" uid="uid://b16tbtdgtisva" path="res://Texture/slime_green.png" id="1_swwnm"]
-[ext_resource type="PackedScene" uid="uid://fpy2dwqbtk28" path="res://Scenes/death_zone.tscn" id="2_aiwxb"]
+[ext_resource type="PackedScene" uid="uid://cy8omtnjwtac1" path="res://Scenes/death_zone2.tscn" id="3_aiwxb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_paq7w"]
 atlas = ExtResource("1_swwnm")
@@ -52,12 +52,6 @@ animation = &"ideal"
 autoplay = "ideal"
 frame_progress = 0.83425164
 
-[node name="DeathZone" parent="." unique_id=385377349 instance=ExtResource("2_aiwxb")]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DeathZone" unique_id=323023890]
-position = Vector2(0, 5)
-shape = SubResource("RectangleShape2D_r4o34")
-
 [node name="RayCastRight" type="RayCast2D" parent="." unique_id=1848033922]
 position = Vector2(0, 5)
 target_position = Vector2(8, 0)
@@ -65,3 +59,9 @@ target_position = Vector2(8, 0)
 [node name="RayCastLeft" type="RayCast2D" parent="." unique_id=1799046143]
 position = Vector2(0, 5)
 target_position = Vector2(-8, 0)
+
+[node name="DeathZone2" parent="." unique_id=598289941 instance=ExtResource("3_aiwxb")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeathZone2" unique_id=323023890]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_r4o34")

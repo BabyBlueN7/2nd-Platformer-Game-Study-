@@ -466,7 +466,7 @@ offset_bottom = -100.0
 theme_override_colors/font_color = Color(0.30962536, 0.33556262, 0.43595803, 1)
 theme_override_fonts/font = ExtResource("7_1l0tm")
 theme_override_font_sizes/font_size = 8
-text = "Don't Touch! Slime Can Kill You Instantly!"
+text = "Don't Touch! Slime Can Take Your Health!"
 
 [node name="Label4" type="Label" parent="Labels" unique_id=1478378844]
 offset_left = 1257.0
