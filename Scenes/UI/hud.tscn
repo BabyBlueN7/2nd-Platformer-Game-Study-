@@ -46,7 +46,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_ny26j")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1738565374]
+[node name="HealthBar" type="AnimatedSprite2D" parent="." unique_id=1738565374]
+position = Vector2(88.75, 46.25)
+scale = Vector2(4.9375, 4.9375)
 sprite_frames = SubResource("SpriteFrames_ux5h0")
-frame = 3
-frame_progress = 1.0

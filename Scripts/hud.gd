@@ -4,6 +4,15 @@ class_name HUD
 
 @onready var health_bar = $HealthBar
 
+func _ready():
+	# Hide in editor, show in game
+	if Engine.is_editor_hint():
+		visible = false
+	else:
+		visible = true
+	
+	update_health_display(3)  # Show full health at start
+
 func update_health_display(current_health: int):
 	if health_bar:
 		if current_health >= 3:

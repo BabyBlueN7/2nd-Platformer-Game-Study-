@@ -7,7 +7,7 @@ const JUMP_VELOCITY = -300.0
 @export var coyote_time: float = 0.1
 @export var invincibility_duration: float = 1.5  # <-- NEW: Now in Inspector!
 @onready var animated_sprite = $AnimatedSprite2D
-@onready var hud = $"../HUD"
+@onready var hud = $"../CanvasLayer/HUD"
 
 var jump_buffer_timer: float = 0.0
 var coyote_timer: float = 0.0
@@ -28,69 +28,72 @@ func _input(event: InputEvent) -> void:
 		jump_buffer_timer = jump_buffer_time
 
 func _physics_process(delta: float) -> void:
-	# Exit early if player is dead (no movement or input)
-	if is_dead:
-		return
-	# Handle Invincibility Timer
-	if is_invincible:
+	# Add gravity (ALWAYS runs, even when dead)
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+
+	# Apply movement (only if alive)
+	if not is_dead:
+		# Update timers
+		if jump_buffer_timer > 0.0:
+			jump_buffer_timer -= delta
+		if coyote_timer > 0.0:
+			coyote_timer -= delta
+
+		# Reset coyote timer when grounded
+		if is_on_floor():
+			coyote_timer = coyote_time
+
+		# Handle jump with buffer and coyote
+		if jump_buffer_timer > 0.0 and coyote_timer > 0.0:
+			velocity.y = JUMP_VELOCITY
+			jump_buffer_timer = 0.0
+			coyote_timer = 0.0
+
+		# Get input direction
+		var direction := Input.get_axis("LEFT", "RIGHT")
+		
+		# Flip sprite
+		if direction > 0:
+			animated_sprite.flip_h = false
+		elif direction < 0:
+			animated_sprite.flip_h = true
+		
+		# Animation logic with flashing
+		if is_invincible:
+			var flash_speed = 0.1
+			if fmod(invincibility_timer, flash_speed * 2) > flash_speed:
+				animated_sprite.visible = true
+			else:
+				animated_sprite.visible = false
+		else:
+			animated_sprite.visible = true
+			
+			if is_on_floor():
+				if direction == 0:
+					animated_sprite.play("ideal")
+				else:
+					animated_sprite.play("run")
+			else:
+				animated_sprite.play("jump")
+
+		# Apply movement
+		if direction:
+			velocity.x = direction * SPEED
+		else:
+			velocity.x = move_toward(velocity.x, 0, SPEED)
+	
+	# Handle Invincibility Timer (only if alive)
+	if not is_dead and is_invincible:
 		invincibility_timer -= delta
 		if invincibility_timer <= 0:
 			is_invincible = false
 
-	# Add gravity
-	if not is_on_floor():
-		velocity += get_gravity() * delta
-
-	# Update timers
-	if jump_buffer_timer > 0.0:
-		jump_buffer_timer -= delta
-	if coyote_timer > 0.0:
-		coyote_timer -= delta
-
-	# Reset coyote timer when grounded
-	if is_on_floor():
-		coyote_timer = coyote_time
-
-	# Handle jump with buffer and coyote
-	if jump_buffer_timer > 0.0 and coyote_timer > 0.0:
-		velocity.y = JUMP_VELOCITY
-		jump_buffer_timer = 0.0
-		coyote_timer = 0.0
-
-	# Get input direction
-	var direction := Input.get_axis("LEFT", "RIGHT")
-	
-	# Flip sprite
-	if direction > 0:
-		animated_sprite.flip_h = false
-	elif direction < 0:
-		animated_sprite.flip_h = true
-	
-	# Animation logic with flashing
-	if is_invincible:
-		var flash_speed = 0.1
-		if fmod(invincibility_timer, flash_speed * 2) > flash_speed:
-			animated_sprite.visible = true
-		else:
-			animated_sprite.visible = false
-	else:
-		animated_sprite.visible = true
-		
-		if is_on_floor():
-			if direction == 0:
-				animated_sprite.play("ideal")
-			else:
-				animated_sprite.play("run")
-		else:
-			animated_sprite.play("jump")
-
-	# Apply movement
-	if direction:
-		velocity.x = direction * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-
 	move_and_slide()
+	
+	# Exit early if dead (after physics applied)
+	if is_dead:
+		return
 
 func take_damage(amount: int):
 	if is_invincible or current_health <= 0:
