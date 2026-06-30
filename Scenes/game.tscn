@@ -2,9 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://dud1ihyn5f08a" path="res://Scenes/player.tscn" id="1_ebmjs"]
 [ext_resource type="PackedScene" uid="uid://dd2b3vcm6unv6" path="res://Scenes/UI/hud.tscn" id="1_ldgsr"]
+[ext_resource type="Script" uid="uid://bct7g0364g6gt" path="res://Scripts/theme.gd" id="1_o5yvi"]
 [ext_resource type="Script" uid="uid://dh1f6d6md7kh5" path="res://Scripts/game_manager.gd" id="1_v158k"]
 [ext_resource type="FontFile" uid="uid://b4ls4sf7adfly" path="res://Font/PixelOperator8-Bold.ttf" id="2_h4fw4"]
 [ext_resource type="Texture2D" uid="uid://bom5n4aythm70" path="res://Texture/world_tileset.png" id="2_qxrlw"]
+[ext_resource type="AudioStream" uid="uid://bkucd3o6u2pm7" path="res://Audio/Music/Sweetwater.mp3" id="2_rku1e"]
 [ext_resource type="PackedScene" uid="uid://phw8rkpvupy6" path="res://Scenes/platform.tscn" id="3_wrm1d"]
 [ext_resource type="PackedScene" uid="uid://c322esmpiciu" path="res://Scenes/coin.tscn" id="4_3dryh"]
 [ext_resource type="PackedScene" uid="uid://fpy2dwqbtk28" path="res://Scenes/death_zone.tscn" id="5_wowpa"]
@@ -286,6 +288,8 @@ _data = {
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_i6g32"]
 
 [node name="Game" type="Node2D" unique_id=358317277]
+script = ExtResource("1_o5yvi")
+area_music = ExtResource("2_rku1e")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=88624298]
 

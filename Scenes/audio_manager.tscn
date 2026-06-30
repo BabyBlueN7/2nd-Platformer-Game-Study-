@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://85hhfoamux0y"]
+
+[ext_resource type="Script" uid="uid://c0c8yhebh3unw" path="res://Scripts/audio_manager.gd" id="1_sm2tf"]
+[ext_resource type="AudioStream" uid="uid://iab2h5cr37hx" path="res://Audio/coin.wav" id="2_4tj6f"]
+[ext_resource type="AudioStream" uid="uid://ydaykbi5vmwn" path="res://Audio/jump.wav" id="2_qixve"]
+[ext_resource type="AudioStream" uid="uid://bhbrodgib001l" path="res://Audio/hurt.wav" id="3_0hehx"]
+[ext_resource type="AudioStream" uid="uid://lben6kmwy8bm" path="res://Audio/dash.wav" id="4_0hehx"]
+[ext_resource type="AudioStream" uid="uid://cenmfrs11ohny" path="res://Audio/footstep_carpet_000.ogg" id="6_mjqhu"]
+[ext_resource type="AudioStream" uid="uid://b4hd0ryfitm2l" path="res://Audio/impactWood_heavy_001.ogg" id="7_5kf6k"]
+
+[node name="AudioManager" type="Node" unique_id=1120232068]
+script = ExtResource("1_sm2tf")
+
+[node name="SFX_Jump" type="AudioStreamPlayer" parent="." unique_id=1904108700]
+stream = ExtResource("2_qixve")
+volume_db = -8.764
+bus = &"SFX"
+
+[node name="SFX_Hurt" type="AudioStreamPlayer" parent="." unique_id=1017630163]
+stream = ExtResource("3_0hehx")
+bus = &"SFX"
+
+[node name="SFX_Dash" type="AudioStreamPlayer" parent="." unique_id=1352729606]
+stream = ExtResource("4_0hehx")
+volume_db = -5.621
+bus = &"SFX"
+
+[node name="SFX_Death" type="AudioStreamPlayer" parent="." unique_id=899303704]
+bus = &"SFX"
+
+[node name="SFX_Coin" type="AudioStreamPlayer" parent="." unique_id=70297793]
+stream = ExtResource("2_4tj6f")
+bus = &"SFX"
+
+[node name="SFX_Walk" type="AudioStreamPlayer" parent="." unique_id=660400124]
+stream = ExtResource("6_mjqhu")
+volume_db = -8.433
+bus = &"SFX"
+
+[node name="SFX_Impact" type="AudioStreamPlayer" parent="." unique_id=209454249]
+stream = ExtResource("7_5kf6k")
+volume_db = -8.433
+bus = &"SFX"
+
+[node name="BGM_Player" type="AudioStreamPlayer" parent="." unique_id=822889776]
+bus = &"Music"

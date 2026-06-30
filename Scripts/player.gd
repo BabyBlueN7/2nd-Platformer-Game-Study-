@@ -16,7 +16,7 @@ const JUMP_VELOCITY = -300.0
 
 var jump_buffer_timer: float = 0.0
 var coyote_timer: float = 0.0
-var facing_direction: float = 1.0 # 1 for right, -1 for left
+var facing_direction: float = 1.0
 
 # --- HEALTH VARIABLES ---
 var max_health: int = 3
@@ -31,16 +31,20 @@ var dash_timer: float = 0.0
 var dash_cooldown_timer: float = 0.0
 var dash_direction: float = 0.0
 
+# --- Track previous frame state ---
+var was_on_floor: bool = false
+
 func _ready():
 	if hud:
 		hud.update_health_display(current_health)
+	was_on_floor = is_on_floor()
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("jump"):
 		jump_buffer_timer = jump_buffer_time
 
 func _physics_process(delta: float) -> void:
-	# 1. Handle Death Physics (Gravity still applies so they fall)
+	# 1. Handle Death Physics
 	if is_dead:
 		if not is_on_floor():
 			velocity += get_gravity() * delta
@@ -63,6 +67,7 @@ func _physics_process(delta: float) -> void:
 		if dash_timer <= 0:
 			is_dashing = false
 			velocity.x = move_toward(velocity.x, 0, SPEED) 
+			AudioManager.stop_walk()
 	else:
 		# --- NORMAL MOVEMENT LOGIC ---
 		if is_invincible:
@@ -72,6 +77,7 @@ func _physics_process(delta: float) -> void:
 
 		if not is_on_floor():
 			velocity += get_gravity() * delta
+			AudioManager.stop_walk()
 
 		if jump_buffer_timer > 0.0: jump_buffer_timer -= delta
 		if coyote_timer > 0.0: coyote_timer -= delta
@@ -81,19 +87,39 @@ func _physics_process(delta: float) -> void:
 			velocity.y = JUMP_VELOCITY
 			jump_buffer_timer = 0.0
 			coyote_timer = 0.0
+			AudioManager.play_jump()
 
 		var direction := Input.get_axis("left", "right")
 		
-		# Track which way the player is facing for dashing
 		if direction != 0:
 			facing_direction = direction
 
+		# --- Check for ANY landing (impact sound) ---
+		if is_on_floor() and not was_on_floor:
+			AudioManager.play_impact()
+		
+		# --- Walk sound ONLY when actually moving ---
+		if is_on_floor() and not is_invincible and not is_dashing:
+			var is_moving = abs(velocity.x) > 10.0 and direction != 0
+			
+			if is_moving:
+				if not AudioManager.sfx_walk.playing:
+					AudioManager.play_walk()
+			else:
+				AudioManager.stop_walk()
+		else:
+			AudioManager.stop_walk()
+
+		# Apply movement
 		if direction:
 			velocity.x = direction * SPEED
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
+	
+	# Update previous frame state
+	was_on_floor = is_on_floor()
 
 func start_dash():
 	is_dashing = true
@@ -102,11 +128,13 @@ func start_dash():
 	
 	var dir = Input.get_axis("left", "right")
 	if dir == 0:
-		dir = facing_direction # Use tracked facing direction
+		dir = facing_direction
 	
 	dash_direction = dir
 	is_invincible = true
 	invincibility_timer = dash_duration + 0.1 
+	
+	AudioManager.play_dash()
 
 func take_damage(amount: int):
 	if is_invincible or current_health <= 0 or is_dead:
@@ -115,6 +143,8 @@ func take_damage(amount: int):
 	current_health -= amount
 	is_invincible = true
 	invincibility_timer = invincibility_duration
+	
+	AudioManager.play_hurt()
 	
 	if hud:
 		hud.update_health_display(current_health)
@@ -125,6 +155,8 @@ func take_damage(amount: int):
 func die():
 	is_dead = true
 	set_process_input(false)
+	
+	AudioManager.play_death()
 	
 	velocity = Vector2.ZERO
 	velocity.y = -150 
