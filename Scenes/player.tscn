@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://co533m2asvtgm" path="res://Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://hf1iitvkhaek" path="res://Texture/knight.png" id="1_v0iea"]
+[ext_resource type="Script" uid="uid://dtf1su17j3nt6" path="res://Scripts/player_animation.gd" id="3_6t5aa"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bi64h"]
 atlas = ExtResource("1_v0iea")
@@ -305,6 +306,7 @@ position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_x3wgy")
 animation = &"roll"
 autoplay = "ideal"
+script = ExtResource("3_6t5aa")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=942810697]
 z_index = 5
