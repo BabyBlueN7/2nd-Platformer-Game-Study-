@@ -51,35 +51,35 @@ region = Rect2(96, 0, 32, 32)
 atlas = ExtResource("1_v0iea")
 region = Rect2(64, 160, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xuaoq"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_y6uwr"]
 atlas = ExtResource("1_v0iea")
 region = Rect2(0, 160, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wohnl"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_xuaoq"]
 atlas = ExtResource("1_v0iea")
 region = Rect2(32, 160, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_36dho"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_wohnl"]
 atlas = ExtResource("1_v0iea")
 region = Rect2(64, 160, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_yh6i2"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_36dho"]
 atlas = ExtResource("1_v0iea")
 region = Rect2(96, 160, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_nv4vc"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_yh6i2"]
 atlas = ExtResource("1_v0iea")
 region = Rect2(128, 160, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8gxox"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_nv4vc"]
 atlas = ExtResource("1_v0iea")
 region = Rect2(160, 160, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_11gg7"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_8gxox"]
 atlas = ExtResource("1_v0iea")
 region = Rect2(192, 160, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qpa8y"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_11gg7"]
 atlas = ExtResource("1_v0iea")
 region = Rect2(224, 160, 32, 32)
 
@@ -207,6 +207,9 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_y6uwr")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_xuaoq")
 }, {
 "duration": 1.0,
@@ -226,13 +229,10 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_11gg7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qpa8y")
 }],
-"loop": true,
+"loop": false,
 "name": &"roll",
-"speed": 10.0
+"speed": 13.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -298,14 +298,13 @@ script = ExtResource("1_cvnsp")
 jump_buffer_time = 0.15
 coyote_time = 0.15
 invincibility_duration = 2.0
+dash_speed = 240.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=992899121]
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_x3wgy")
-animation = &"hit"
+animation = &"roll"
 autoplay = "ideal"
-frame = 2
-frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=942810697]
 z_index = 5
