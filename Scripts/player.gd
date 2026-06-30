@@ -33,6 +33,7 @@ var dash_direction: float = 0.0
 
 # --- Track previous frame state ---
 var was_on_floor: bool = false
+var impact_delay_timer: float = 0.5  # <-- NEW: 1-second delay to fix startup glitch
 
 func _ready():
 	if hud:
@@ -46,8 +47,7 @@ func _input(event: InputEvent) -> void:
 func _physics_process(delta: float) -> void:
 	# 1. Handle Death Physics
 	if is_dead:
-		if not is_on_floor():
-			velocity += get_gravity() * delta
+		velocity += get_gravity() * delta
 		move_and_slide()
 		return
 
@@ -67,7 +67,7 @@ func _physics_process(delta: float) -> void:
 		if dash_timer <= 0:
 			is_dashing = false
 			velocity.x = move_toward(velocity.x, 0, SPEED) 
-			AudioManager.stop_walk()
+			AudioManager.stop_walk() # Stop walk sound when dash ends
 	else:
 		# --- NORMAL MOVEMENT LOGIC ---
 		if is_invincible:
@@ -75,14 +75,16 @@ func _physics_process(delta: float) -> void:
 			if invincibility_timer <= 0:
 				is_invincible = false
 
+		# Add gravity
 		if not is_on_floor():
 			velocity += get_gravity() * delta
-			AudioManager.stop_walk()
 
+		# Update timers
 		if jump_buffer_timer > 0.0: jump_buffer_timer -= delta
 		if coyote_timer > 0.0: coyote_timer -= delta
 		if is_on_floor(): coyote_timer = coyote_time
 
+		# Handle jump
 		if jump_buffer_timer > 0.0 and coyote_timer > 0.0:
 			velocity.y = JUMP_VELOCITY
 			jump_buffer_timer = 0.0
@@ -94,30 +96,37 @@ func _physics_process(delta: float) -> void:
 		if direction != 0:
 			facing_direction = direction
 
-		# --- Check for ANY landing (impact sound) ---
-		if is_on_floor() and not was_on_floor:
-			AudioManager.play_impact()
-		
-		# --- Walk sound ONLY when actually moving ---
-		if is_on_floor() and not is_invincible and not is_dashing:
-			var is_moving = abs(velocity.x) > 10.0 and direction != 0
-			
-			if is_moving:
-				if not AudioManager.sfx_walk.playing:
-					AudioManager.play_walk()
-			else:
-				AudioManager.stop_walk()
-		else:
-			AudioManager.stop_walk()
-
-		# Apply movement
+		# Apply horizontal movement
 		if direction:
 			velocity.x = direction * SPEED
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 
+	# --- CRITICAL FIX: Call move_and_slide BEFORE checking is_on_floor() ---
 	move_and_slide()
-	
+
+	# 5. Check for landing (Impact Sound) - WITH 1 SECOND DELAY
+	if impact_delay_timer > 0.0:
+		# Countdown the delay
+		impact_delay_timer -= delta
+	else:
+		# Delay is over, now check for landing normally
+		if is_on_floor() and not was_on_floor:
+			AudioManager.play_impact()
+
+	# 6. Walk sound logic (Only when actually moving)
+	if is_on_floor() and not is_invincible and not is_dashing:
+		var direction := Input.get_axis("left", "right")
+		var is_moving = abs(velocity.x) > 10.0 and direction != 0
+		
+		if is_moving:
+			if not AudioManager.sfx_walk.playing:
+				AudioManager.play_walk()
+		else:
+			AudioManager.stop_walk()
+	else:
+		AudioManager.stop_walk()
+
 	# Update previous frame state
 	was_on_floor = is_on_floor()
 
@@ -156,6 +165,7 @@ func die():
 	is_dead = true
 	set_process_input(false)
 	
+	# Play death SFX
 	AudioManager.play_death()
 	
 	velocity = Vector2.ZERO

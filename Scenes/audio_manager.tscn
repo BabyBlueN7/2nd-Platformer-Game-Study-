@@ -5,6 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://ydaykbi5vmwn" path="res://Audio/jump.wav" id="2_qixve"]
 [ext_resource type="AudioStream" uid="uid://bhbrodgib001l" path="res://Audio/hurt.wav" id="3_0hehx"]
 [ext_resource type="AudioStream" uid="uid://lben6kmwy8bm" path="res://Audio/dash.wav" id="4_0hehx"]
+[ext_resource type="AudioStream" uid="uid://cwxf8o6aaifu8" path="res://Audio/died.wav" id="5_tnn7g"]
 [ext_resource type="AudioStream" uid="uid://cenmfrs11ohny" path="res://Audio/footstep_carpet_000.ogg" id="6_mjqhu"]
 [ext_resource type="AudioStream" uid="uid://b4hd0ryfitm2l" path="res://Audio/impactWood_heavy_001.ogg" id="7_5kf6k"]
 
@@ -26,7 +27,9 @@ volume_db = -5.621
 bus = &"SFX"
 
 [node name="SFX_Death" type="AudioStreamPlayer" parent="." unique_id=899303704]
-bus = &"SFX"
+stream = ExtResource("5_tnn7g")
+volume_db = -2.108
+bus = &"Music"
 
 [node name="SFX_Coin" type="AudioStreamPlayer" parent="." unique_id=70297793]
 stream = ExtResource("2_4tj6f")
@@ -39,7 +42,7 @@ bus = &"SFX"
 
 [node name="SFX_Impact" type="AudioStreamPlayer" parent="." unique_id=209454249]
 stream = ExtResource("7_5kf6k")
-volume_db = -8.433
+volume_db = -4.217
 bus = &"SFX"
 
 [node name="BGM_Player" type="AudioStreamPlayer" parent="." unique_id=822889776]
