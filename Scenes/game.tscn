@@ -486,15 +486,17 @@ text = "Don't Touch! Slime Can Take Your Health!"
 metadata/_edit_use_anchors_ = true
 
 [node name="Label4" type="Label" parent="Labels" unique_id=1478378844]
-offset_left = 1257.0
-offset_top = -237.0
-offset_right = 1414.0
-offset_bottom = -214.0
+anchors_preset = -1
+anchor_right = -0.0078125
+offset_left = 1275.0
+offset_top = -261.0
+offset_right = 1432.0
+offset_bottom = -198.0
 theme_override_colors/font_color = Color(0.4270487, 0.45483112, 0.58450073, 1)
 theme_override_fonts/font = ExtResource("7_1l0tm")
 theme_override_font_sizes/font_size = 8
-text = "These are One Platforms,
-You Can Enter Through it."
+text = "These are One Way Platforms,
+You Can Enter it By Jumping Through it. Also Can Go Down Directly if You Want."
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2

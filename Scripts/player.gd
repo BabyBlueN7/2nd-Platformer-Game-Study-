@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 const SPEED = 120.0
 const JUMP_VELOCITY = -300.0
+const PLATFORM_LAYER = 9 # Your platform layer
 
 @export var jump_buffer_time: float = 0.1
 @export var coyote_time: float = 0.1
@@ -33,7 +34,7 @@ var dash_direction: float = 0.0
 
 # --- Track previous frame state ---
 var was_on_floor: bool = false
-var impact_delay_timer: float = 0.5  # <-- NEW: 1-second delay to fix startup glitch
+var impact_delay_timer: float = 0.5 
 
 func _ready():
 	if hud:
@@ -67,7 +68,7 @@ func _physics_process(delta: float) -> void:
 		if dash_timer <= 0:
 			is_dashing = false
 			velocity.x = move_toward(velocity.x, 0, SPEED) 
-			AudioManager.stop_walk() # Stop walk sound when dash ends
+			AudioManager.stop_walk()
 	else:
 		# --- NORMAL MOVEMENT LOGIC ---
 		if is_invincible:
@@ -75,8 +76,8 @@ func _physics_process(delta: float) -> void:
 			if invincibility_timer <= 0:
 				is_invincible = false
 
-		# Add gravity
-		if not is_on_floor():
+		# --- FIX: Apply gravity if in air OR if pressing down to drop through platforms ---
+		if not is_on_floor() or Input.is_action_pressed("down"):
 			velocity += get_gravity() * delta
 
 		# Update timers
@@ -102,15 +103,19 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 
-	# --- CRITICAL FIX: Call move_and_slide BEFORE checking is_on_floor() ---
+	# --- TWO-WAY PLATFORM DROP DOWN LOGIC (Moved here for physics reliability) ---
+	if Input.is_action_pressed("down"):
+		set_collision_mask_value(PLATFORM_LAYER, false)
+	else:
+		set_collision_mask_value(PLATFORM_LAYER, true)
+
+	# --- CRITICAL: Call move_and_slide BEFORE checking floor status ---
 	move_and_slide()
 
-	# 5. Check for landing (Impact Sound) - WITH 1 SECOND DELAY
+	# 5. Check for landing (Impact Sound) - WITH 0.5 SECOND DELAY
 	if impact_delay_timer > 0.0:
-		# Countdown the delay
 		impact_delay_timer -= delta
 	else:
-		# Delay is over, now check for landing normally
 		if is_on_floor() and not was_on_floor:
 			AudioManager.play_impact()
 
