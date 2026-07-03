@@ -31,6 +31,7 @@ var is_dashing: bool = false
 var dash_timer: float = 0.0
 var dash_cooldown_timer: float = 0.0
 var dash_direction: float = 0.0
+var dash_iframe_active: bool = false
 
 # --- Track previous frame state ---
 var was_on_floor: bool = false
@@ -75,6 +76,7 @@ func _physics_process(delta: float) -> void:
 			invincibility_timer -= delta
 			if invincibility_timer <= 0:
 				is_invincible = false
+				dash_iframe_active = false 
 
 		# --- FIX: Apply gravity if in air OR if pressing down to drop through platforms ---
 		if not is_on_floor() or Input.is_action_pressed("down"):
@@ -145,20 +147,14 @@ func start_dash():
 		dir = facing_direction
 	
 	dash_direction = dir
-	is_invincible = true
-	invincibility_timer = dash_duration + 0.1 
 	
-	AudioManager.play_dash()
+	# Only apply dash invincibility if we aren't ALREADY invincible from a hit!
+	if not is_invincible:
+		is_invincible = true
+		invincibility_timer = dash_duration + 0.1 
+		dash_iframe_active = true
 
-func take_damage(amount: int):
-	if is_invincible or current_health <= 0 or is_dead:
-		return
-		
-	current_health -= amount
-	is_invincible = true
-	invincibility_timer = invincibility_duration
-	
-	AudioManager.play_hurt()
+	AudioManager.play_dash()
 	
 	if hud:
 		hud.update_health_display(current_health)
@@ -178,3 +174,20 @@ func die():
 
 	await get_tree().create_timer(1.5).timeout
 	get_tree().reload_current_scene()
+
+func take_damage(amount: int):
+	if is_invincible or current_health <= 0 or is_dead:
+		return
+		
+	current_health -= amount
+	is_invincible = true
+	invincibility_timer = invincibility_duration
+	dash_iframe_active = false # <--- CRITICAL: Turns off dash flag so hit blinking works!
+	
+	AudioManager.play_hurt()
+	
+	if hud:
+		hud.update_health_display(current_health)
+	
+	if current_health <= 0:
+		die()

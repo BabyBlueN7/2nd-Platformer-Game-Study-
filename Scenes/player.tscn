@@ -306,6 +306,8 @@ position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_x3wgy")
 animation = &"roll"
 autoplay = "ideal"
+frame = 7
+frame_progress = 1.0
 script = ExtResource("3_6t5aa")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=942810697]

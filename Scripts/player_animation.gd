@@ -58,6 +58,12 @@ func _physics_process(delta: float) -> void:
 	handle_flip()
 
 func handle_flashing():
+	# 1. If invincibility is specifically from a DASH, NEVER blink.
+	if player.dash_iframe_active:
+		visible = true
+		return
+
+	# 2. Otherwise, handle normal invincibility blinking (like when hit by an enemy)
 	if player.is_invincible:
 		var flash_speed = 0.1
 		if fmod(player.invincibility_timer, flash_speed * 2) > flash_speed:
