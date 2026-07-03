@@ -2,6 +2,9 @@
 
 [ext_resource type="Script" uid="uid://b3j0ax8bk65ld" path="res://Scripts/hud.gd" id="1_ny26j"]
 [ext_resource type="Texture2D" uid="uid://csnqqtni7pyoe" path="res://Texture/Heart_Health_Bar.png" id="1_sprlj"]
+[ext_resource type="FontFile" uid="uid://b4ls4sf7adfly" path="res://Font/PixelOperator8-Bold.ttf" id="3_8glcj"]
+[ext_resource type="Script" uid="uid://dh1f6d6md7kh5" path="res://Scripts/game_manager.gd" id="4_ux5h0"]
+[ext_resource type="Texture2D" uid="uid://bsc0bei2vlnbe" path="res://Texture/coin for hud.png" id="4_vsu76"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ny26j"]
 atlas = ExtResource("1_sprlj")
@@ -39,14 +42,50 @@ animations = [{
 "speed": 4.0
 }]
 
+[sub_resource type="LabelSettings" id="LabelSettings_ux5h0"]
+font = ExtResource("3_8glcj")
+font_size = 31
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 0
+shadow_color = Color(0, 0, 0, 0.49411765)
+
 [node name="HUD" type="Control" unique_id=6132361]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_ny26j")
 
 [node name="HealthBar" type="AnimatedSprite2D" parent="." unique_id=1738565374]
-position = Vector2(88.75, 46.25)
+position = Vector2(96, 56)
 scale = Vector2(4.9375, 4.9375)
 sprite_frames = SubResource("SpriteFrames_ux5h0")
+
+[node name="CoinLabel" type="Label" parent="." unique_id=121339827]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -264.0
+offset_top = 32.0
+offset_right = -171.0
+offset_bottom = 64.0
+grow_horizontal = 0
+text = "000"
+label_settings = SubResource("LabelSettings_ux5h0")
+script = ExtResource("4_ux5h0")
+
+[node name="Coin" type="TextureRect" parent="." unique_id=1202637911]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -303.99994
+offset_top = 32.0
+offset_right = 696.0
+offset_bottom = 1032.0
+grow_horizontal = 0
+scale = Vector2(0.033749938, 0.032749996)
+texture = ExtResource("4_vsu76")
