@@ -4,6 +4,22 @@
 [ext_resource type="Texture2D" uid="uid://b16tbtdgtisva" path="res://Texture/slime_green.png" id="1_swwnm"]
 [ext_resource type="PackedScene" uid="uid://cy8omtnjwtac1" path="res://Scenes/death_zone2.tscn" id="3_aiwxb"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_c7ij5"]
+atlas = ExtResource("1_swwnm")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_psnrq"]
+atlas = ExtResource("1_swwnm")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kh8cv"]
+atlas = ExtResource("1_swwnm")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_555id"]
+atlas = ExtResource("1_swwnm")
+region = Rect2(0, 0, 24, 24)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_aiwxb"]
 atlas = ExtResource("1_swwnm")
 region = Rect2(0, 54, 24, 18)
@@ -38,6 +54,23 @@ region = Rect2(72, 24, 24, 24)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_e388w"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c7ij5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_psnrq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kh8cv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_555id")
+}],
+"loop": false,
+"name": &"died",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_aiwxb")
@@ -83,8 +116,7 @@ script = ExtResource("1_aiwxb")
 sprite_frames = SubResource("SpriteFrames_e388w")
 animation = &"hit"
 autoplay = "ideal"
-frame = 3
-frame_progress = 0.526671
+frame_progress = 0.751911
 
 [node name="RayCastRight" type="RayCast2D" parent="." unique_id=1848033922]
 position = Vector2(0, 5)

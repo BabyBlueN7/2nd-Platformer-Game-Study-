@@ -5,6 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://ydaykbi5vmwn" path="res://Audio/jump.wav" id="2_qixve"]
 [ext_resource type="AudioStream" uid="uid://bhbrodgib001l" path="res://Audio/hurt.wav" id="3_0hehx"]
 [ext_resource type="AudioStream" uid="uid://lben6kmwy8bm" path="res://Audio/dash.wav" id="4_0hehx"]
+[ext_resource type="AudioStream" uid="uid://ct404frd825ww" path="res://Audio/tap.wav" id="4_lwpe1"]
 [ext_resource type="AudioStream" uid="uid://cwxf8o6aaifu8" path="res://Audio/died.wav" id="5_tnn7g"]
 [ext_resource type="AudioStream" uid="uid://cenmfrs11ohny" path="res://Audio/footstep_carpet_000.ogg" id="6_mjqhu"]
 [ext_resource type="AudioStream" uid="uid://b4hd0ryfitm2l" path="res://Audio/impactWood_heavy_001.ogg" id="7_5kf6k"]
@@ -19,6 +20,10 @@ bus = &"SFX"
 
 [node name="SFX_Hurt" type="AudioStreamPlayer" parent="." unique_id=1017630163]
 stream = ExtResource("3_0hehx")
+bus = &"SFX"
+
+[node name="SFX_Hit" type="AudioStreamPlayer" parent="." unique_id=614362868]
+stream = ExtResource("4_lwpe1")
 bus = &"SFX"
 
 [node name="SFX_Dash" type="AudioStreamPlayer" parent="." unique_id=1352729606]

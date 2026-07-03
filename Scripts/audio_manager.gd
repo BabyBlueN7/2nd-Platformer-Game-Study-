@@ -8,6 +8,8 @@ extends Node
 @onready var sfx_death = $SFX_Death
 @onready var sfx_walk = $SFX_Walk
 @onready var sfx_impact = $SFX_Impact 
+@onready var sfx_hit = $SFX_Hit
+
 
 # --- BGM PLAYER ---
 @onready var bgm_player = $BGM_Player
@@ -40,6 +42,10 @@ func stop_walk():
 func play_impact():
 	if sfx_impact:
 		sfx_impact.play()
+
+func play_hit():
+	if sfx_hit:
+		sfx_hit.play()
 
 # --- SMART BGM FUNCTIONS ---
 
