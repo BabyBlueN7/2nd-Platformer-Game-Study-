@@ -65,6 +65,7 @@ func _physics_process(delta: float) -> void:
 	if is_dashing:
 		dash_timer -= delta
 		velocity.x = dash_direction * dash_speed
+		velocity.y = 0  # Cancel all vertical momentum for a straight dash
 		
 		if dash_timer <= 0:
 			is_dashing = false
@@ -78,8 +79,8 @@ func _physics_process(delta: float) -> void:
 				is_invincible = false
 				dash_iframe_active = false 
 
-		# --- FIX: Apply gravity if in air OR if pressing down to drop through platforms ---
-		if not is_on_floor() or Input.is_action_pressed("down"):
+		# --- FIX: Apply gravity if in air OR if pressing down, BUT NOT while dashing ---
+		if (not is_on_floor() or Input.is_action_pressed("down")) and not is_dashing:
 			velocity += get_gravity() * delta
 
 		# Update timers
