@@ -436,14 +436,14 @@ position = Vector2(2592, -197)
 
 [node name="Slimes" type="Node" parent="." unique_id=749396909]
 
-[node name="Slime" parent="Slimes" unique_id=440193434 instance=ExtResource("6_i6g32")]
-position = Vector2(504, -76)
-
 [node name="Slime2" parent="Slimes" unique_id=584761802 instance=ExtResource("6_i6g32")]
 position = Vector2(1848, 36)
 
 [node name="Slime3" parent="Slimes" unique_id=757233167 instance=ExtResource("6_i6g32")]
 position = Vector2(2377, -44)
+
+[node name="Slime4" parent="Slimes" unique_id=440193434 instance=ExtResource("6_i6g32")]
+position = Vector2(502, -76)
 
 [node name="DeathZone" parent="." unique_id=385377349 instance=ExtResource("5_wowpa")]
 

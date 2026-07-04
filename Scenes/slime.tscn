@@ -114,9 +114,10 @@ script = ExtResource("1_aiwxb")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=208457888]
 sprite_frames = SubResource("SpriteFrames_e388w")
-animation = &"hit"
+animation = &"ideal"
 autoplay = "ideal"
-frame_progress = 0.751911
+frame = 1
+frame_progress = 0.104038484
 
 [node name="RayCastRight" type="RayCast2D" parent="." unique_id=1848033922]
 position = Vector2(0, 5)
