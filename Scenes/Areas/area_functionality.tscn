@@ -1,16 +1,16 @@
 [gd_scene format=3 uid="uid://kx40e66s8yko"]
 
-[ext_resource type="Script" uid="uid://bct7g0364g6gt" path="res://Scripts/theme.gd" id="1_6dp53"]
-[ext_resource type="AudioStream" uid="uid://bkucd3o6u2pm7" path="res://Audio/Music/Sweetwater.mp3" id="2_0l580"]
-[ext_resource type="PackedScene" uid="uid://dd2b3vcm6unv6" path="res://Scenes/UI/hud.tscn" id="3_gv0s5"]
-[ext_resource type="Script" uid="uid://dh1f6d6md7kh5" path="res://Scripts/game_manager.gd" id="4_uf3p3"]
-[ext_resource type="Texture2D" uid="uid://bom5n4aythm70" path="res://Texture/world_tileset.png" id="6_vhkku"]
-[ext_resource type="PackedScene" uid="uid://dud1ihyn5f08a" path="res://Scenes/player.tscn" id="7_7sabd"]
-[ext_resource type="PackedScene" uid="uid://fpy2dwqbtk28" path="res://Scenes/death_zone.tscn" id="11_1ybif"]
-[ext_resource type="FontFile" uid="uid://cwo7blga8miws" path="res://Font/PixelOperator8.ttf" id="12_o842v"]
+[ext_resource type="Script" uid="uid://bct7g0364g6gt" path="res://Scripts/theme.gd" id="1_ewing"]
+[ext_resource type="AudioStream" uid="uid://bkucd3o6u2pm7" path="res://Audio/Music/Sweetwater.mp3" id="2_klpey"]
+[ext_resource type="PackedScene" uid="uid://dd2b3vcm6unv6" path="res://Scenes/UI/hud.tscn" id="3_djqpw"]
+[ext_resource type="Script" uid="uid://dh1f6d6md7kh5" path="res://Scripts/game_manager.gd" id="4_bdb8u"]
+[ext_resource type="Texture2D" uid="uid://bom5n4aythm70" path="res://Texture/world_tileset.png" id="5_mafou"]
+[ext_resource type="PackedScene" uid="uid://dud1ihyn5f08a" path="res://Scenes/player.tscn" id="6_ml8op"]
+[ext_resource type="PackedScene" uid="uid://fpy2dwqbtk28" path="res://Scenes/death_zone.tscn" id="7_h0bow"]
+[ext_resource type="FontFile" uid="uid://cwo7blga8miws" path="res://Font/PixelOperator8.ttf" id="8_0dg12"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wrm1d"]
-texture = ExtResource("6_vhkku")
+texture = ExtResource("5_mafou")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:0/0 = 0
@@ -169,12 +169,12 @@ sources/0 = SubResource("TileSetAtlasSource_wrm1d")
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_i6g32"]
 
 [node name="Game" type="Node2D" unique_id=358317277]
-script = ExtResource("1_6dp53")
-area_music = ExtResource("2_0l580")
+script = ExtResource("1_ewing")
+area_music = ExtResource("2_klpey")
 
 [node name="AreaFunctionality" type="CanvasLayer" parent="." unique_id=88624298]
 
-[node name="HUD" parent="AreaFunctionality" unique_id=6132361 instance=ExtResource("3_gv0s5")]
+[node name="HUD" parent="AreaFunctionality" unique_id=6132361 instance=ExtResource("3_djqpw")]
 visible = false
 offset_right = 129.0
 offset_bottom = 27.543999
@@ -182,7 +182,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="GameManager" type="Node" parent="." unique_id=484353001]
 unique_name_in_owner = true
-script = ExtResource("4_uf3p3")
+script = ExtResource("4_bdb8u")
 
 [node name="TileMap" type="TileMap" parent="." unique_id=1457569446]
 tile_set = SubResource("TileSet_3dryh")
@@ -191,7 +191,7 @@ layer_0/name = "Background"
 layer_1/name = "Mid"
 layer_1/tile_data = PackedInt32Array(327668, 0, 0, 327669, 0, 0, 327670, 0, 0, 327671, 0, 0, 327672, 0, 0, 393204, 0, 1, 393205, 0, 1, 393206, 0, 1, 393207, 0, 1, 393208, 0, 1)
 
-[node name="Player" parent="." unique_id=8528514 instance=ExtResource("7_7sabd")]
+[node name="Player" parent="." unique_id=8528514 instance=ExtResource("6_ml8op")]
 position = Vector2(-150, 65)
 
 [node name="Platforms" type="Node" parent="." unique_id=357845866]
@@ -202,7 +202,7 @@ position = Vector2(-150, 65)
 
 [node name="RedSlimes" type="Node" parent="." unique_id=2102393124]
 
-[node name="DeathZone" parent="." unique_id=385377349 instance=ExtResource("11_1ybif")]
+[node name="DeathZone" parent="." unique_id=385377349 instance=ExtResource("7_h0bow")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DeathZone" unique_id=276324852]
 position = Vector2(-2, 109)
@@ -216,7 +216,7 @@ offset_top = 22.0
 offset_right = -58.0
 offset_bottom = 45.0
 theme_override_colors/font_color = Color(0.24418974, 0.2675133, 0.34403744, 1)
-theme_override_fonts/font = ExtResource("12_o842v")
+theme_override_fonts/font = ExtResource("8_0dg12")
 theme_override_font_sizes/font_size = 8
 text = "Press 'Space' for Jump"
 metadata/_edit_use_anchors_ = true
