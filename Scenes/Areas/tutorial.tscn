@@ -1,8 +1,7 @@
 [gd_scene format=3 uid="uid://ca71ov3h6t0u8"]
 
-[ext_resource type="Script" uid="uid://bct7g0364g6gt" path="res://Scripts/theme.gd" id="1_2su5m"]
-[ext_resource type="AudioStream" uid="uid://bkucd3o6u2pm7" path="res://Audio/Music/Sweetwater.mp3" id="2_bfiad"]
 [ext_resource type="PackedScene" uid="uid://dd2b3vcm6unv6" path="res://Scenes/UI/hud.tscn" id="3_lv4jn"]
+[ext_resource type="AudioStream" uid="uid://bswsehtnnhsno" path="res://Audio/Music/time_for_adventure.mp3" id="3_tf6gq"]
 [ext_resource type="Script" uid="uid://dh1f6d6md7kh5" path="res://Scripts/game_manager.gd" id="4_c5nj5"]
 [ext_resource type="FontFile" uid="uid://b4ls4sf7adfly" path="res://Font/PixelOperator8-Bold.ttf" id="5_bpo2p"]
 [ext_resource type="Texture2D" uid="uid://bom5n4aythm70" path="res://Texture/world_tileset.png" id="6_hw6fb"]
@@ -288,20 +287,19 @@ _data = {
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_i6g32"]
 
 [node name="Tutorial" type="Node2D" unique_id=358317277]
-script = ExtResource("1_2su5m")
-area_music = ExtResource("2_bfiad")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=88624298]
 
-[node name="HUD" parent="CanvasLayer" unique_id=6132361 instance=ExtResource("3_lv4jn")]
+[node name="HUD" parent="CanvasLayer" unique_id=6132361 groups=["hud"] instance=ExtResource("3_lv4jn")]
 visible = false
 offset_right = 129.0
 offset_bottom = 27.543999
 metadata/_edit_use_anchors_ = true
 
-[node name="GameManager" type="Node" parent="." unique_id=484353001]
+[node name="GameManager" type="Node" parent="." unique_id=484353001 groups=["game_manager"]]
 unique_name_in_owner = true
 script = ExtResource("4_c5nj5")
+area_music = ExtResource("3_tf6gq")
 
 [node name="ScoreLabel" type="Label" parent="GameManager" unique_id=822424438]
 offset_left = 2798.0
@@ -318,6 +316,7 @@ autowrap_mode = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="Player" parent="." unique_id=8528514 instance=ExtResource("7_ymyrk")]
+z_index = 1
 position = Vector2(-150, 65)
 
 [node name="TileMap" type="TileMap" parent="." unique_id=1457569446]

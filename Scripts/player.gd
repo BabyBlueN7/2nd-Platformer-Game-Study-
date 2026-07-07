@@ -13,7 +13,7 @@ const PLATFORM_LAYER = 9 # Your platform layer
 @export var dash_duration: float = 0.2
 @export var dash_cooldown: float = 0.5 
 
-@onready var hud = $"/root/Game/CanvasLayer/HUD" 
+@onready var hud = get_tree().get_first_node_in_group("hud")
 
 var jump_buffer_timer: float = 0.0
 var coyote_timer: float = 0.0

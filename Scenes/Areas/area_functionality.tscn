@@ -1,10 +1,9 @@
 [gd_scene format=3 uid="uid://kx40e66s8yko"]
 
-[ext_resource type="Script" uid="uid://bct7g0364g6gt" path="res://Scripts/theme.gd" id="1_ewing"]
-[ext_resource type="AudioStream" uid="uid://bkucd3o6u2pm7" path="res://Audio/Music/Sweetwater.mp3" id="2_klpey"]
 [ext_resource type="PackedScene" uid="uid://dd2b3vcm6unv6" path="res://Scenes/UI/hud.tscn" id="3_djqpw"]
 [ext_resource type="Script" uid="uid://dh1f6d6md7kh5" path="res://Scripts/game_manager.gd" id="4_bdb8u"]
 [ext_resource type="Texture2D" uid="uid://bom5n4aythm70" path="res://Texture/world_tileset.png" id="5_mafou"]
+[ext_resource type="PackedScene" uid="uid://c322esmpiciu" path="res://Scenes/coin.tscn" id="5_s2cl0"]
 [ext_resource type="PackedScene" uid="uid://dud1ihyn5f08a" path="res://Scenes/player.tscn" id="6_ml8op"]
 [ext_resource type="PackedScene" uid="uid://fpy2dwqbtk28" path="res://Scenes/death_zone.tscn" id="7_h0bow"]
 [ext_resource type="FontFile" uid="uid://cwo7blga8miws" path="res://Font/PixelOperator8.ttf" id="8_0dg12"]
@@ -169,18 +168,16 @@ sources/0 = SubResource("TileSetAtlasSource_wrm1d")
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_i6g32"]
 
 [node name="Game" type="Node2D" unique_id=358317277]
-script = ExtResource("1_ewing")
-area_music = ExtResource("2_klpey")
 
 [node name="AreaFunctionality" type="CanvasLayer" parent="." unique_id=88624298]
 
-[node name="HUD" parent="AreaFunctionality" unique_id=6132361 instance=ExtResource("3_djqpw")]
+[node name="HUD" parent="AreaFunctionality" unique_id=6132361 groups=["hud"] instance=ExtResource("3_djqpw")]
 visible = false
 offset_right = 129.0
 offset_bottom = 27.543999
 metadata/_edit_use_anchors_ = true
 
-[node name="GameManager" type="Node" parent="." unique_id=484353001]
+[node name="GameManager" type="Node" parent="." unique_id=484353001 groups=["game_manager"]]
 unique_name_in_owner = true
 script = ExtResource("4_bdb8u")
 
@@ -192,11 +189,15 @@ layer_1/name = "Mid"
 layer_1/tile_data = PackedInt32Array(327668, 0, 0, 327669, 0, 0, 327670, 0, 0, 327671, 0, 0, 327672, 0, 0, 393204, 0, 1, 393205, 0, 1, 393206, 0, 1, 393207, 0, 1, 393208, 0, 1)
 
 [node name="Player" parent="." unique_id=8528514 instance=ExtResource("6_ml8op")]
+z_index = 1
 position = Vector2(-150, 65)
 
 [node name="Platforms" type="Node" parent="." unique_id=357845866]
 
 [node name="Coins" type="Node" parent="." unique_id=1752634465]
+
+[node name="Coin" parent="Coins" unique_id=1077198857 instance=ExtResource("5_s2cl0")]
+position = Vector2(-182, 55)
 
 [node name="Slimes" type="Node" parent="." unique_id=749396909]
 
