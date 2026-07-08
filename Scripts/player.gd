@@ -32,6 +32,7 @@ var dash_timer: float = 0.0
 var dash_cooldown_timer: float = 0.0
 var dash_direction: float = 0.0
 var dash_iframe_active: bool = false
+var has_used_air_dash: bool = false 
 
 # --- Track previous frame state ---
 var was_on_floor: bool = false
@@ -59,7 +60,12 @@ func _physics_process(delta: float) -> void:
 
 	# 3. Trigger Dash
 	if Input.is_action_just_pressed("dash") and not is_dashing and dash_cooldown_timer <= 0:
-		start_dash()
+		# Allow dash if on the ground, OR if we haven't used our air dash yet
+		if is_on_floor() or not has_used_air_dash:
+			start_dash()
+			# If we dashed in the air, mark it as used
+			if not is_on_floor():
+				has_used_air_dash = true
 
 	# 4. Handle Active Dash
 	if is_dashing:
@@ -86,7 +92,10 @@ func _physics_process(delta: float) -> void:
 		# Update timers
 		if jump_buffer_timer > 0.0: jump_buffer_timer -= delta
 		if coyote_timer > 0.0: coyote_timer -= delta
-		if is_on_floor(): coyote_timer = coyote_time
+		
+		if is_on_floor(): 
+			coyote_timer = coyote_time
+			has_used_air_dash = false  # <--- RESET AIR DASH WHEN LANDING
 
 		# Handle jump
 		if jump_buffer_timer > 0.0 and coyote_timer > 0.0:
