@@ -51,7 +51,7 @@ func take_dash_damage():
 	animated_sprite.play("hit")
 	
 	# Check if should die
-	if hit_count >= 3:
+	if hit_count >= 2:
 		die()
 
 func die():

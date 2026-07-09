@@ -167,11 +167,11 @@ sources/0 = SubResource("TileSetAtlasSource_wrm1d")
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_i6g32"]
 
-[node name="Game" type="Node2D" unique_id=358317277]
+[node name="AreaFunctionality" type="Node2D" unique_id=358317277]
 
-[node name="AreaFunctionality" type="CanvasLayer" parent="." unique_id=88624298]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=88624298]
 
-[node name="HUD" parent="AreaFunctionality" unique_id=6132361 groups=["hud"] instance=ExtResource("3_djqpw")]
+[node name="HUD" parent="CanvasLayer" unique_id=6132361 groups=["hud"] instance=ExtResource("3_djqpw")]
 visible = false
 offset_right = 129.0
 offset_bottom = 27.543999

@@ -126,7 +126,7 @@ position = Vector2(0, 6)
 target_position = Vector2(-8, 0)
 
 [node name="DeathZone2" parent="." unique_id=385377349 instance=ExtResource("3_kam2t")]
-damage = 3
+damage = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DeathZone2" unique_id=2021792631]
 position = Vector2(0, 5)

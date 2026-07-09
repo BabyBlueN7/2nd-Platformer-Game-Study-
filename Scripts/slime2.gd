@@ -50,8 +50,8 @@ func take_dash_damage():
 	# Play hit animation
 	animated_sprite.play("hit")
 	
-	# --- CHANGE 1: Now requires 5 hits to die! ---
-	if hit_count >= 5:
+	# --- CHANGE 1: Now requires 3 hits to die! ---
+	if hit_count >= 3:
 		die()
 
 func die():

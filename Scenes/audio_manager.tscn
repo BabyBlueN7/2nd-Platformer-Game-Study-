@@ -9,6 +9,8 @@
 [ext_resource type="AudioStream" uid="uid://cwxf8o6aaifu8" path="res://Audio/died.wav" id="5_tnn7g"]
 [ext_resource type="AudioStream" uid="uid://cenmfrs11ohny" path="res://Audio/footstep_carpet_000.ogg" id="6_mjqhu"]
 [ext_resource type="AudioStream" uid="uid://b4hd0ryfitm2l" path="res://Audio/impactWood_heavy_001.ogg" id="7_5kf6k"]
+[ext_resource type="AudioStream" uid="uid://d3uudyx3qnx2n" path="res://Audio/impactPlate_medium_003.ogg" id="10_5nrbi"]
+[ext_resource type="AudioStream" uid="uid://ckt5u2spvc3cq" path="res://Audio/freesound_community-rock-destroy-6409.mp3" id="11_pn88s"]
 
 [node name="AudioManager" type="Node" unique_id=1120232068]
 script = ExtResource("1_sm2tf")
@@ -48,6 +50,15 @@ bus = &"SFX"
 [node name="SFX_Impact" type="AudioStreamPlayer" parent="." unique_id=209454249]
 stream = ExtResource("7_5kf6k")
 volume_db = -4.217
+bus = &"SFX"
+
+[node name="SFX_GolemAttack" type="AudioStreamPlayer" parent="." unique_id=679761757]
+stream = ExtResource("10_5nrbi")
+volume_db = 16.138
+bus = &"SFX"
+
+[node name="SFX_GolemDied" type="AudioStreamPlayer" parent="." unique_id=1010702770]
+stream = ExtResource("11_pn88s")
 bus = &"SFX"
 
 [node name="BGM_Player" type="AudioStreamPlayer" parent="." unique_id=822889776]

@@ -9,6 +9,8 @@ extends Node
 @onready var sfx_walk = $SFX_Walk
 @onready var sfx_impact = $SFX_Impact 
 @onready var sfx_hit = $SFX_Hit
+@onready var sfx_golem_hit = $SFX_GolemAttack
+@onready var sfx_golem_death = $SFX_GolemDied
 
 
 # --- BGM PLAYER ---
@@ -46,6 +48,15 @@ func play_impact():
 func play_hit():
 	if sfx_hit:
 		sfx_hit.play()
+
+# for golem sounds
+func play_golem_hit():
+	if sfx_golem_hit:
+		sfx_golem_hit.play()
+
+func play_golem_death():
+	if sfx_golem_death:
+		sfx_golem_death.play()
 
 # --- SMART BGM FUNCTIONS ---
 

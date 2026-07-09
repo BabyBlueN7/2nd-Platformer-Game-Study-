@@ -2,4 +2,4 @@
 
 [ext_resource type="PackedScene" uid="uid://kx40e66s8yko" path="res://Scenes/Areas/area_functionality.tscn" id="1_dhgtn"]
 
-[node name="Game" unique_id=358317277 instance=ExtResource("1_dhgtn")]
+[node name="Area1" unique_id=358317277 instance=ExtResource("1_dhgtn")]
