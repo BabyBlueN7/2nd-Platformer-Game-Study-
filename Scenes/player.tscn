@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://co533m2asvtgm" path="res://Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://hf1iitvkhaek" path="res://Texture/knight.png" id="1_v0iea"]
 [ext_resource type="Script" uid="uid://dtf1su17j3nt6" path="res://Scripts/player_animation.gd" id="3_6t5aa"]
+[ext_resource type="Script" uid="uid://cvo787ndaujh6" path="res://Scripts/camera_2d.gd" id="4_vgqql"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bi64h"]
 atlas = ExtResource("1_v0iea")
@@ -323,3 +324,4 @@ limit_bottom = 110
 limit_smoothed = true
 position_smoothing_enabled = true
 position_smoothing_speed = 7.0
+script = ExtResource("4_vgqql")

@@ -320,7 +320,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Player" parent="." unique_id=8528514 instance=ExtResource("7_kuf18")]
 z_index = 1
-position = Vector2(-159.95532, 49.01709)
+position = Vector2(-90.78998, -131.39374)
 
 [node name="TileMap" type="TileMap" parent="." unique_id=1457569446]
 z_index = -1
@@ -510,4 +510,4 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(159, -175)
 
 [node name="Portal" parent="." unique_id=1820054430 instance=ExtResource("13_s00ma")]
-position = Vector2(-26, 32)
+position = Vector2(879, -69)

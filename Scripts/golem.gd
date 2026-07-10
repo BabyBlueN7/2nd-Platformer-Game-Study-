@@ -96,7 +96,7 @@ func start_attack():
 	current_state = State.ATTACK
 	animated_sprite.play("attack")
 	
-	# 11 FPS: Frame 5 end = 0.55s, Frame 9 start = 0.82s
+	# 11 FPS: Frame 5 end = 0.55s, Frame 9 start = 0.82s, Finish = 1.0s
 	get_tree().create_timer(0.55).timeout.connect(_enable_hitbox)
 	get_tree().create_timer(0.82).timeout.connect(_disable_hitbox)
 	get_tree().create_timer(1.0).timeout.connect(_finish_attack)
@@ -105,9 +105,11 @@ func _enable_hitbox():
 	if current_state == State.ATTACK and death_zone and not is_dead:
 		death_zone.monitoring = true
 		death_zone.monitorable = true
-		trigger_screen_shake()
 		
-		# PLAY ATTACK SOUND - Exactly when hitbox activates!
+		# START SCREEN SHAKE HERE
+		start_camera_shake()
+		
+		# PLAY ATTACK SOUND
 		if AudioManager and AudioManager.has_method("play_golem_attack"):
 			AudioManager.play_golem_attack()
 
@@ -121,11 +123,35 @@ func _finish_attack():
 		is_attacking = false
 		current_state = State.WALK
 		animated_sprite.play("walk")
+		
+		# STOP SCREEN SHAKE HERE
+		stop_camera_shake()
+
+# --- CAMERA SHAKE FUNCTIONS ---
+
+func start_camera_shake():
+	var camera = get_tree().get_first_node_in_group("camera")
+	if camera:
+		# Start shaking with a long duration (it will be stopped manually)
+		if camera.has_method("start_shake"):
+			camera.start_shake(999.0, 1.3) # Changed 10.0 to 2.0 for a small shake
+		# Fallback if your camera doesn't have start_shake but uses a tween
+		elif camera.has_method("shake"):
+			camera.shake(0.45, 1.3) # Changed 10.0 to 2.0
+
+func stop_camera_shake():
+	var camera = get_tree().get_first_node_in_group("camera")
+	if camera:
+		if camera.has_method("stop_shake"):
+			camera.stop_shake()
+		elif camera.has_method("stop"):
+			camera.stop()
+
+# --- DAMAGE LOGIC ---
 
 func trigger_screen_shake():
-	var camera = get_tree().get_first_node_in_group("camera")
-	if camera and camera.has_method("start_shake"):
-		camera.start_shake(0.3, 8)
+	# Kept for backwards compatibility, but we use the new functions now
+	start_camera_shake()
 
 func take_dash_damage(_is_bash_dash: bool = false):
 	if is_dead or current_state == State.HIT:
@@ -164,6 +190,7 @@ func die():
 			child.monitorable = false
 	
 	set_collision_mask_value(8, false)
+	stop_camera_shake() # Ensure shake stops if golem dies mid-attack
 	
 	if AudioManager and AudioManager.has_method("play_golem_death"):
 		AudioManager.play_golem_death()
