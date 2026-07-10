@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://fpy2dwqbtk28" path="res://Scenes/death_zone.tscn" id="11_copon"]
 [ext_resource type="PackedScene" uid="uid://bgaabcn7cnntd" path="res://Scenes/golem.tscn" id="12_0f8u1"]
 [ext_resource type="FontFile" uid="uid://cwo7blga8miws" path="res://Font/PixelOperator8.ttf" id="12_wjyqs"]
+[ext_resource type="PackedScene" uid="uid://k0lmu2a4d51b" path="res://Scenes/portal.tscn" id="13_s00ma"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wrm1d"]
 texture = ExtResource("6_2ocox")
@@ -319,7 +320,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Player" parent="." unique_id=8528514 instance=ExtResource("7_kuf18")]
 z_index = 1
-position = Vector2(97, -159)
+position = Vector2(-159.95532, 49.01709)
 
 [node name="TileMap" type="TileMap" parent="." unique_id=1457569446]
 z_index = -1
@@ -507,3 +508,6 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Golem" parent="." unique_id=903394804 instance=ExtResource("12_0f8u1")]
 position = Vector2(159, -175)
+
+[node name="Portal" parent="." unique_id=1820054430 instance=ExtResource("13_s00ma")]
+position = Vector2(-26, 32)

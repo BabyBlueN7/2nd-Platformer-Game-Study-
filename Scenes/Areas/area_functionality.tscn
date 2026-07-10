@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dud1ihyn5f08a" path="res://Scenes/player.tscn" id="6_ml8op"]
 [ext_resource type="PackedScene" uid="uid://fpy2dwqbtk28" path="res://Scenes/death_zone.tscn" id="7_h0bow"]
 [ext_resource type="FontFile" uid="uid://cwo7blga8miws" path="res://Font/PixelOperator8.ttf" id="8_0dg12"]
+[ext_resource type="PackedScene" uid="uid://k0lmu2a4d51b" path="res://Scenes/portal.tscn" id="8_ewing"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wrm1d"]
 texture = ExtResource("5_mafou")
@@ -167,6 +168,9 @@ sources/0 = SubResource("TileSetAtlasSource_wrm1d")
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_i6g32"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ewing"]
+size = Vector2(3.5, 75)
+
 [node name="AreaFunctionality" type="Node2D" unique_id=358317277]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=88624298]
@@ -221,3 +225,14 @@ theme_override_fonts/font = ExtResource("8_0dg12")
 theme_override_font_sizes/font_size = 8
 text = "Press 'Space' for Jump"
 metadata/_edit_use_anchors_ = true
+
+[node name="InvincibleWalls" type="StaticBody2D" parent="." unique_id=786367387]
+position = Vector2(-124, 47)
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InvincibleWalls" unique_id=2081998549]
+position = Vector2(-68, 9)
+shape = SubResource("RectangleShape2D_ewing")
+
+[node name="Portal" parent="." unique_id=1820054430 instance=ExtResource("8_ewing")]
+position = Vector2(-124, 47)
