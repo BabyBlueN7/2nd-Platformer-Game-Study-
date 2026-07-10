@@ -3,16 +3,15 @@ extends CharacterBody2D
 class_name Golem
 
 @export var walk_speed: float = 40.0
-@export var attack_range: float = 80.0
-@export var max_health: int = 10
+@export var attack_range: float = 100.0
 @export var bash_dash_health: int = 6
 
-var current_health: int
 var hit_count: int = 0
 var direction: int = 1
 var is_attacking: bool = false
 var player_in_range: bool = false
 var can_turn: bool = true
+var is_dead: bool = false
 
 enum State { WALK, ATTACK, HIT, DEAD }
 var current_state: State = State.WALK
@@ -21,44 +20,46 @@ var current_state: State = State.WALK
 @onready var death_zone = $DeathZone2
 @onready var detection_zone = $DetectionZone
 @onready var edge_ray = $EdgeRay
-@onready var body_collision = $CollisionShape2D
 
 func _ready():
-	current_health = max_health
 	animated_sprite.play("walk")
-	death_zone.monitoring = false
+	if death_zone:
+		death_zone.monitoring = false
 	
 	if detection_zone:
 		detection_zone.body_entered.connect(_on_detection_body_entered)
 		detection_zone.body_exited.connect(_on_detection_body_exited)
 
-func _physics_process(delta):
-	if current_state == State.DEAD:
-		velocity += get_gravity() * delta
+func _physics_process(_delta):
+	if is_dead:
+		velocity = Vector2.ZERO
+		set_collision_mask_value(8, false)
 		move_and_slide()
 		return
+
+	if current_state == State.HIT or current_state == State.ATTACK:
+		velocity = Vector2.ZERO
+	else:
+		velocity.y += get_gravity().y * _delta
+		velocity.x = direction * walk_speed
 
 	update_edge_ray()
 	
 	match current_state:
 		State.WALK:
 			handle_walk()
-		State.ATTACK:
-			velocity.x = 0
-		State.HIT:
-			velocity.x = 0
 
-	if current_state != State.ATTACK and current_state != State.HIT:
-		velocity += get_gravity() * delta
-		
 	move_and_slide()
 
 func update_edge_ray():
-	var front_x = 30 * direction
+	var front_x = 25 * direction
 	edge_ray.position = Vector2(front_x, 0)
-	edge_ray.target_position = Vector2(0, 50)
+	edge_ray.target_position = Vector2(0, 60)
 
 func handle_walk():
+	if is_dead or current_state == State.ATTACK:
+		return
+		
 	if player_in_range:
 		var player = get_tree().get_first_node_in_group("player")
 		if player and player.global_position.distance_to(global_position) <= attack_range:
@@ -69,11 +70,8 @@ func handle_walk():
 		direction *= -1
 		animated_sprite.flip_h = (direction == -1)
 		can_turn = false
-		await get_tree().create_timer(0.5).timeout
-		can_turn = true
+		get_tree().create_timer(0.5).timeout.connect(func(): can_turn = true)
 
-	velocity.x = direction * walk_speed
-	
 	if animated_sprite.animation != "walk":
 		animated_sprite.play("walk")
 
@@ -91,74 +89,95 @@ func _on_detection_body_exited(body: Node2D):
 		player_in_range = false
 
 func start_attack():
-	if is_attacking or current_state == State.DEAD:
+	if is_attacking or is_dead or current_state == State.DEAD:
 		return
 	
 	is_attacking = true
 	current_state = State.ATTACK
 	animated_sprite.play("attack")
 	
-	# Activate hitbox at frame 5
-	await _wait_for_animation_frame(5)
-	death_zone.monitoring = true
-	death_zone.monitorable = true
-	trigger_screen_shake()
-	
-	# Deactivate after frame 9
-	await _wait_for_animation_frame(10)
-	death_zone.monitoring = false
-	death_zone.monitorable = false
-	
-	await animated_sprite.animation_finished
-	
-	is_attacking = false
-	current_state = State.WALK
-	animated_sprite.play("walk")
+	# 11 FPS: Frame 5 end = 0.55s, Frame 9 start = 0.82s
+	get_tree().create_timer(0.55).timeout.connect(_enable_hitbox)
+	get_tree().create_timer(0.82).timeout.connect(_disable_hitbox)
+	get_tree().create_timer(1.0).timeout.connect(_finish_attack)
 
-func _wait_for_animation_frame(target_frame: int):
-	# Wait until animation reaches target frame
-	while animated_sprite.frame < target_frame and animated_sprite.is_playing():
-		await get_tree().process_frame
+func _enable_hitbox():
+	if current_state == State.ATTACK and death_zone and not is_dead:
+		death_zone.monitoring = true
+		death_zone.monitorable = true
+		trigger_screen_shake()
+		
+		# PLAY ATTACK SOUND - Exactly when hitbox activates!
+		if AudioManager and AudioManager.has_method("play_golem_attack"):
+			AudioManager.play_golem_attack()
+
+func _disable_hitbox():
+	if death_zone:
+		death_zone.monitoring = false
+		death_zone.monitorable = false
+
+func _finish_attack():
+	if not is_dead:
+		is_attacking = false
+		current_state = State.WALK
+		animated_sprite.play("walk")
 
 func trigger_screen_shake():
 	var camera = get_tree().get_first_node_in_group("camera")
 	if camera and camera.has_method("start_shake"):
 		camera.start_shake(0.3, 8)
 
-# --- DAMAGE FUNCTION (Called by death_zone2.gd) ---
-func take_dash_damage(is_bash_dash: bool = false):
-	if current_state == State.DEAD or current_state == State.HIT:
+func take_dash_damage(_is_bash_dash: bool = false):
+	if is_dead or current_state == State.HIT:
 		return
 	
 	hit_count += 1
-	print("🗿 GOLEM HIT! Count: ", hit_count, " / ", (bash_dash_health if is_bash_dash else max_health))
+	print("GOLEM HIT! Count: ", hit_count, " / ", bash_dash_health)
 	
-	# Play hit sound
 	if AudioManager and AudioManager.has_method("play_hit"):
 		AudioManager.play_hit()
 	
 	current_state = State.HIT
 	animated_sprite.play("hit")
 	
-	var threshold = bash_dash_health if is_bash_dash else max_health
-	
-	if hit_count >= threshold:
+	if hit_count >= bash_dash_health:
 		die()
 	else:
-		await animated_sprite.animation_finished
-		if current_state == State.HIT:
-			current_state = State.WALK
-			animated_sprite.play("walk")
+		get_tree().create_timer(0.4).timeout.connect(_return_to_walk)
+
+func _return_to_walk():
+	if current_state == State.HIT and not is_dead:
+		current_state = State.WALK
+		animated_sprite.play("walk")
 
 func die():
+	is_dead = true
 	current_state = State.DEAD
+	
+	if death_zone:
+		death_zone.monitoring = false
+		death_zone.monitorable = false
+	
+	for child in get_children():
+		if child is Area2D:
+			child.monitoring = false
+			child.monitorable = false
+	
+	set_collision_mask_value(8, false)
+	
+	if AudioManager and AudioManager.has_method("play_golem_death"):
+		AudioManager.play_golem_death()
+	
 	animated_sprite.play("died")
-	death_zone.monitoring = false
-	if body_collision:
-		body_collision.set_deferred("disabled", true)
 	
-	if AudioManager and AudioManager.has_method("play_death"):
-		AudioManager.play_death()
+	var frame_count = animated_sprite.sprite_frames.get_frame_count("died")
+	var fps = animated_sprite.sprite_frames.get_animation_speed("died")
+	var duration = frame_count / fps
 	
-	await animated_sprite.animation_finished
-	queue_free()
+	await get_tree().create_timer(duration).timeout
+	
+	animated_sprite.stop()
+	animated_sprite.frame = frame_count - 1
+	
+	set_physics_process(false)
+	set_process(false)

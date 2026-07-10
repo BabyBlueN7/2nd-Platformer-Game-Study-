@@ -49,13 +49,13 @@ func play_hit():
 	if sfx_hit:
 		sfx_hit.play()
 
-# for golem sounds
-func play_golem_hit():
-	if sfx_golem_hit:
+
+func play_golem_attack():
+	if sfx_golem_hit: # This is your $SFX_GolemAttack node
 		sfx_golem_hit.play()
 
 func play_golem_death():
-	if sfx_golem_death:
+	if sfx_golem_death: # This is your $SFX_GolemDied node
 		sfx_golem_death.play()
 
 # --- SMART BGM FUNCTIONS ---
