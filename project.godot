@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="2nd Platformer Game (Study)"
-run/main_scene="uid://cjpb1tf1qw2kp"
+run/main_scene="uid://ca71ov3h6t0u8"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -22,6 +22,7 @@ buses/default_bus_layout="uid://dt260dpf85uek"
 [autoload]
 
 AudioManager="*uid://85hhfoamux0y"
+Global="*uid://cx8gfyx1qij2j"
 
 [display]
 

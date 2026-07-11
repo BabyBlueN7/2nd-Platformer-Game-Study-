@@ -26,7 +26,6 @@ func update_health_display(current_health: int):
 			health_bar.frame = 3
 
 func update_coin_display():
-	# Find GameManager by GROUP - works in ANY folder!
-	var game_manager = get_tree().get_first_node_in_group("game_manager")
-	if game_manager and coin_label:
-		coin_label.text = "%03d" % game_manager.score
+	# Read directly from the Global autoload
+	if coin_label:
+		coin_label.text = "%03d" % Global.score

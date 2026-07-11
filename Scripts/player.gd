@@ -12,6 +12,7 @@ const PLATFORM_LAYER = 9 # Your platform layer
 @export var dash_speed: float = 350.0
 @export var dash_duration: float = 0.2
 @export var dash_cooldown: float = 0.5 
+@export var can_dash: bool = true
 
 @onready var hud = get_tree().get_first_node_in_group("hud")
 
@@ -59,7 +60,7 @@ func _physics_process(delta: float) -> void:
 		dash_cooldown_timer -= delta
 
 	# 3. Trigger Dash
-	if Input.is_action_just_pressed("dash") and not is_dashing and dash_cooldown_timer <= 0:
+	if can_dash and Input.is_action_just_pressed("dash") and not is_dashing and dash_cooldown_timer <= 0:
 		# Allow dash if on the ground, OR if we haven't used our air dash yet
 		if is_on_floor() or not has_used_air_dash:
 			start_dash()

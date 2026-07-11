@@ -5,8 +5,6 @@ extends Node
 # Music control (from theme.gd)
 @export var area_music: AudioStream
 
-var score = 0
-
 func _ready():
 	# Play background music for this area
 	if area_music:
@@ -18,11 +16,12 @@ func _ready():
 		hud.update_coin_display()
 
 func add_point():
-	score += 1
+	# Add to the GLOBAL score so it carries over to the next scene
+	Global.score += 1
 	
 	# Update the GameManager's label (for end screen/message)
 	if score_label:
-		score_label.text = "You Collected " + str(score) + " Coins."
+		score_label.text = "You Collected " + str(Global.score) + " Coins."
 	
 	# Find and update HUD anywhere in scene tree
 	var hud = get_tree().get_first_node_in_group("hud")

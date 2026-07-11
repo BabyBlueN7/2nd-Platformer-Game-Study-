@@ -315,7 +315,8 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Player" parent="." unique_id=8528514 instance=ExtResource("7_ymyrk")]
 z_index = 1
-position = Vector2(2813.7314, -181.09982)
+position = Vector2(-152, 65)
+can_dash = false
 
 [node name="TileMap" type="TileMap" parent="." unique_id=1457569446]
 z_index = -3
