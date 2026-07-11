@@ -3,3 +3,20 @@
 [ext_resource type="PackedScene" uid="uid://kx40e66s8yko" path="res://Scenes/Areas/area_functionality.tscn" id="1_dhgtn"]
 
 [node name="Area1" unique_id=358317277 instance=ExtResource("1_dhgtn")]
+
+[node name="TileMap" parent="." index="2" unique_id=1457569446]
+layer_1/tile_data = PackedInt32Array(327668, 393216, 2, 327669, 393216, 2, 327670, 393216, 2, 327671, 393216, 2, 327672, 393216, 2, 393204, 393216, 2, 393205, 393216, 2, 393206, 393216, 2, 393207, 393216, 2, 393208, 393216, 2, 262132, 393216, 2, 262133, 393216, 2, 262136, 393216, 2, 262135, 393216, 2, 262134, 393216, 2, 262137, 393216, 2, 262138, 393216, 2, 327674, 393216, 2, 327675, 393216, 2, 393210, 393216, 2, 393209, 393216, 2, 327673, 393216, 2, 262139, 393216, 2, 393211, 393216, 2, 262140, 393216, 2, 327676, 393216, 2, 393212, 393216, 2, 262141, 393216, 2, 327677, 393216, 2, 393213, 393216, 2, 196596, 393216, 2, 196597, 393216, 2, 196598, 393216, 2, 196599, 393216, 2, 196600, 393216, 2, 196601, 393216, 2, 196602, 393216, 2, 196603, 393216, 2, 196604, 393216, 2, 196605, 393216, 2, 196606, 393216, 2, 262142, 393216, 2, 327678, 393216, 2, 393214, 393216, 2)
+
+[node name="Player" parent="." index="3" unique_id=8528514]
+position = Vector2(-163, 30)
+
+[node name="Coin" parent="Coins" parent_id_path=PackedInt32Array(1752634465) index="0" unique_id=1077198857]
+visible = false
+position = Vector2(-178, 43)
+
+[node name="Label" parent="Labels" parent_id_path=PackedInt32Array(465755127) index="0" unique_id=1868254844]
+visible = false
+
+[node name="Portal" parent="." index="11" unique_id=1820054430]
+visible = false
+position = Vector2(-116, 20)

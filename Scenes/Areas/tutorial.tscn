@@ -288,6 +288,9 @@ _data = {
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_i6g32"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bfiad"]
+size = Vector2(0.75, 115.5)
+
 [node name="Tutorial" type="Node2D" unique_id=358317277]
 
 [node name="Portal" parent="." unique_id=1820054430 instance=ExtResource("2_2su5m")]
@@ -509,3 +512,11 @@ visible = false
 offset_right = 129.0
 offset_bottom = 27.543999
 metadata/_edit_use_anchors_ = true
+
+[node name="InvincibleWalls" type="StaticBody2D" parent="." unique_id=1047417047]
+position = Vector2(-124, 47)
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InvincibleWalls" unique_id=781492798]
+position = Vector2(3024.375, -258.25)
+shape = SubResource("RectangleShape2D_bfiad")
