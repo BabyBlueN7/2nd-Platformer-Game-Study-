@@ -9,7 +9,7 @@
 [ext_resource type="FontFile" uid="uid://cwo7blga8miws" path="res://Font/PixelOperator8.ttf" id="8_0dg12"]
 [ext_resource type="PackedScene" uid="uid://k0lmu2a4d51b" path="res://Scenes/portal.tscn" id="8_ewing"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wrm1d"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h0bow"]
 texture = ExtResource("5_mafou")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -165,7 +165,7 @@ texture = ExtResource("5_mafou")
 
 [sub_resource type="TileSet" id="TileSet_3dryh"]
 physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_wrm1d")
+sources/0 = SubResource("TileSetAtlasSource_h0bow")
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_i6g32"]
 
@@ -188,18 +188,18 @@ tile_set = SubResource("TileSet_3dryh")
 format = 2
 layer_0/name = "Background"
 layer_1/name = "Mid"
-layer_1/tile_data = PackedInt32Array(327668, 0, 0, 327669, 0, 0, 327670, 0, 0, 327671, 0, 0, 327672, 0, 0, 393204, 0, 1, 393205, 0, 1, 393206, 0, 1, 393207, 0, 1, 393208, 0, 1)
+layer_1/tile_data = PackedInt32Array(655348, 0, 0, 655349, 0, 0, 655350, 0, 0, 655351, 0, 0, 655352, 0, 0, 655353, 0, 0, 655354, 0, 0, 655355, 0, 0, 720884, 0, 1, 720885, 0, 1, 720886, 0, 1, 720887, 0, 1, 720888, 0, 1, 720889, 0, 1, 720890, 0, 1, 720891, 0, 1, 786420, 0, 1, 786421, 0, 1, 786422, 0, 1, 786423, 0, 1, 786424, 0, 1, 786425, 0, 1, 786426, 0, 1, 786427, 0, 1)
 
 [node name="Player" parent="." unique_id=8528514 instance=ExtResource("6_ml8op")]
 z_index = 1
-position = Vector2(-150, 65)
+position = Vector2(-170, 144)
 
 [node name="Platforms" type="Node" parent="." unique_id=357845866]
 
 [node name="Coins" type="Node" parent="." unique_id=1752634465]
 
 [node name="Coin" parent="Coins" unique_id=1077198857 instance=ExtResource("5_s2cl0")]
-position = Vector2(-182, 55)
+position = Vector2(-141, 128)
 
 [node name="Slimes" type="Node" parent="." unique_id=749396909]
 
@@ -208,16 +208,16 @@ position = Vector2(-182, 55)
 [node name="DeathZone" parent="." unique_id=385377349 instance=ExtResource("7_h0bow")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DeathZone" unique_id=276324852]
-position = Vector2(-2, 109)
+position = Vector2(-1, 198)
 shape = SubResource("WorldBoundaryShape2D_i6g32")
 
 [node name="Labels" type="Node" parent="." unique_id=465755127]
 
 [node name="Label" type="Label" parent="Labels" unique_id=1868254844]
-offset_left = -200.0
-offset_top = 22.0
-offset_right = -58.0
-offset_bottom = 45.0
+offset_left = -213.12424
+offset_top = 93.20263
+offset_right = -71.12424
+offset_bottom = 116.20263
 theme_override_colors/font_color = Color(0.24418974, 0.2675133, 0.34403744, 1)
 theme_override_fonts/font = ExtResource("8_0dg12")
 theme_override_font_sizes/font_size = 8
@@ -229,4 +229,4 @@ position = Vector2(-124, 47)
 collision_mask = 128
 
 [node name="Portal" parent="." unique_id=1820054430 instance=ExtResource("8_ewing")]
-position = Vector2(-124, 47)
+position = Vector2(-102, 119)

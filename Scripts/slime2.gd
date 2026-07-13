@@ -1,6 +1,7 @@
 extends Node2D
 
-const SPEED = 100
+const SPEED = 120
+
 var direction = 1
 var hit_count: int = 0
 var is_dead: bool = false
@@ -10,6 +11,7 @@ var hit_timer: float = 0.0
 @onready var ray_cast_right: RayCast2D = $AnimatedSprite2D/RayCastRight
 @onready var ray_cast_left: RayCast2D = $AnimatedSprite2D/RayCastLeft
 @onready var animated_sprite = $AnimatedSprite2D
+@onready var death_zone = $DeathZone2  # <--- Added reference to DeathZone2
 
 func _ready():
 	animated_sprite.play("ideal")
@@ -45,12 +47,13 @@ func take_dash_damage():
 	hit_timer = 0.3  # Brief pause when hit
 	
 	# PLAY THE HIT SOUND
-	AudioManager.play_hit() # (Make sure this function exists in your AudioManager!)
+	if AudioManager:
+		AudioManager.play_hit()
 	
 	# Play hit animation
 	animated_sprite.play("hit")
 	
-	# --- CHANGE 1: Now requires 3 hits to die! ---
+	# Now requires 3 hits to die!
 	if hit_count >= 3:
 		die()
 
@@ -59,7 +62,7 @@ func die():
 	is_hit = false
 	animated_sprite.play("died")
 	
-	# --- CHANGE 2: Disables the original DeathZone instead of DeathZone2 ---
-	var death_zone = get_node_or_null("DeathZone") 
+	# Turn off DeathZone2 when it dies
 	if death_zone:
 		death_zone.set_deferred("monitoring", false)
+		death_zone.set_deferred("monitorable", false)
