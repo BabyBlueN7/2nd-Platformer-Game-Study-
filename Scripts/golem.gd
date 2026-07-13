@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 class_name Golem
 
-@export var walk_speed: float = 40.0
+@export var walk_speed: float = 80.0
 @export var attack_range: float = 100.0
 @export var bash_dash_health: int = 6
 

@@ -356,7 +356,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk",
-"speed": 11.0
+"speed": 15.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tspt6"]
@@ -379,7 +379,7 @@ script = ExtResource("1_t2gh5")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=965894557]
 position = Vector2(1, -17)
 sprite_frames = SubResource("SpriteFrames_vfcqh")
-animation = &"died"
+animation = &"walk"
 autoplay = "ideal"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1392366013]

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="2nd Platformer Game (Study)"
-run/main_scene="uid://bua61vyeb0eyb"
+run/main_scene="uid://bpbx2is3ku1ts"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
