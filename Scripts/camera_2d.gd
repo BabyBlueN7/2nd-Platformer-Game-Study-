@@ -1,5 +1,8 @@
 extends Camera2D
 
+# --- NEW: Add this to easily change the limit in the Inspector! ---
+@export var custom_limit_bottom: int = 110
+
 var is_shaking: bool = false
 var shake_timer: float = 0.0
 var shake_intensity: float = 0.0
@@ -7,6 +10,9 @@ var shake_intensity: float = 0.0
 func _ready():
 	# Automatically add to the "camera" group so the Golem can find it
 	add_to_group("camera")
+	
+	# Apply the limit from the Inspector
+	self.limit_bottom = custom_limit_bottom
 
 func _process(delta):
 	if is_shaking:
