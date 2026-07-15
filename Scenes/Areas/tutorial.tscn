@@ -320,6 +320,7 @@ metadata/_edit_use_anchors_ = true
 [node name="Player" parent="." unique_id=8528514 instance=ExtResource("7_ymyrk")]
 z_index = 1
 position = Vector2(-152, 65)
+camera_limit_bottom = 110
 can_dash = false
 
 [node name="TileMap" type="TileMap" parent="." unique_id=1457569446]

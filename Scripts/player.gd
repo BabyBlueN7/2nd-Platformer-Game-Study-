@@ -7,7 +7,7 @@ const PLATFORM_LAYER = 9 # Your platform layer
 @export var jump_buffer_time: float = 0.1
 @export var coyote_time: float = 0.1
 @export var invincibility_duration: float = 1.5
-@export var camera_limit_bottom: int = 110
+@export var camera_limit_bottom: int = 190
 
 # --- DASH VARIABLES ---
 @export var dash_speed: float = 350.0

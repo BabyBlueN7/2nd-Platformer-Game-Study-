@@ -1,7 +1,7 @@
 extends Camera2D
 
 # --- NEW: Add this to easily change the limit in the Inspector! ---
-@export var custom_limit_bottom: int = 110
+@export var custom_limit_bottom: int = 190
 
 var is_shaking: bool = false
 var shake_timer: float = 0.0
