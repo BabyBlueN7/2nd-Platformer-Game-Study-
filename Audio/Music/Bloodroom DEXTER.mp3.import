@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cstuqyy6d7hi"
+path="res://.godot/imported/Bloodroom DEXTER.mp3-b0cadb03fc1589c7c3c139be524ba423.mp3str"
+
+[deps]
+
+source_file="res://Audio/Music/Bloodroom DEXTER.mp3"
+dest_files=["res://.godot/imported/Bloodroom DEXTER.mp3-b0cadb03fc1589c7c3c139be524ba423.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

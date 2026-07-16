@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://cm3m0jfd2ctac"]
+
+[ext_resource type="Script" uid="uid://dmo8qpds6tclw" path="res://Scripts/final_scene.gd" id="1_pc766"]
+[ext_resource type="FontFile" uid="uid://ddbm625856ybs" path="res://Font/Kenney Pixel Square.ttf" id="2_dobve"]
+[ext_resource type="FontFile" uid="uid://cwo7blga8miws" path="res://Font/PixelOperator8.ttf" id="3_4s8th"]
+[ext_resource type="Texture2D" uid="uid://bsc0bei2vlnbe" path="res://Texture/coin for hud.png" id="4_4s8th"]
+[ext_resource type="Texture2D" uid="uid://cpw0c6y57c0sk" path="res://Texture/BabyBlueN7.png" id="5_6lply"]
+[ext_resource type="Script" uid="uid://dh1f6d6md7kh5" path="res://Scripts/game_manager.gd" id="5_uw4yj"]
+[ext_resource type="AudioStream" uid="uid://cstuqyy6d7hi" path="res://Audio/Music/Bloodroom DEXTER.mp3" id="6_6lply"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5lkha"]
+font = ExtResource("3_4s8th")
+font_size = 26
+
+[node name="FinalScene" type="Node2D" unique_id=347727252]
+script = ExtResource("1_pc766")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=155581320]
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0.0029900146, 0, 0.33108988, 1)
+
+[node name="ThankYouLabel" type="Label" parent="." unique_id=731302181]
+offset_left = 442.0
+offset_top = 447.0
+offset_right = 1474.0
+offset_bottom = 588.0
+theme_override_fonts/font = ExtResource("2_dobve")
+theme_override_font_sizes/font_size = 73
+text = "THANK YOU FOR PLAYING!"
+
+[node name="Follow" type="Label" parent="." unique_id=734872108]
+offset_left = 807.0
+offset_top = 978.0
+offset_right = 1110.0
+offset_bottom = 1010.0
+theme_override_fonts/font = ExtResource("3_4s8th")
+theme_override_font_sizes/font_size = 20
+text = "Follow @BabyBlueN7"
+
+[node name="CoinsLabel" type="Label" parent="." unique_id=1035714592]
+offset_left = 673.0
+offset_top = 574.0
+offset_right = 1196.0
+offset_bottom = 601.0
+text = "Total Coins Collected: 111"
+label_settings = SubResource("LabelSettings_5lkha")
+
+[node name="DeathsLabel" type="Label" parent="." unique_id=1530227865]
+offset_left = 677.0
+offset_top = 620.0
+offset_right = 1152.0
+offset_bottom = 647.0
+text = "Number of Times Died: 1"
+label_settings = SubResource("LabelSettings_5lkha")
+
+[node name="RestartButton" type="Button" parent="." unique_id=316926928]
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=854076715]
+offset_left = 1210.0
+offset_top = 569.0
+offset_right = 1242.0
+offset_bottom = 601.0
+texture = ExtResource("4_4s8th")
+expand_mode = 1
+
+[node name="scanner" type="TextureRect" parent="." unique_id=598704332]
+offset_left = 874.0
+offset_top = 804.0
+offset_right = 1015.0
+offset_bottom = 945.0
+texture = ExtResource("5_6lply")
+expand_mode = 1
+
+[node name="GameManager" type="Node" parent="." unique_id=1009476956]
+script = ExtResource("5_uw4yj")
+area_music = ExtResource("6_6lply")

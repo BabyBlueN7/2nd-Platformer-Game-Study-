@@ -10,10 +10,11 @@ config_version=5
 
 [application]
 
-config/name="2nd Platformer Game (Study)"
-run/main_scene="uid://bpbx2is3ku1ts"
+config/name="Knight Dasher"
+run/main_scene="uid://ca71ov3h6t0u8"
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="res://icon.svg"
+boot_splash/image="uid://ddytfgogyx2i4"
+config/icon="uid://ddytfgogyx2i4"
 
 [audio]
 
@@ -28,7 +29,7 @@ Global="*uid://cx8gfyx1qij2j"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/mode=2
+window/size/mode=3
 window/stretch/scale_mode="integer"
 
 [global_group]

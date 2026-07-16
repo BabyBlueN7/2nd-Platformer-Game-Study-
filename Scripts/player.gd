@@ -186,7 +186,8 @@ func start_dash():
 func die():
 	is_dead = true
 	set_process_input(false)
-	
+	# Count this death
+	Global.add_death()
 	# Play death SFX
 	AudioManager.play_death()
 	
