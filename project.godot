@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Knight Dasher"
 run/main_scene="uid://ca71ov3h6t0u8"
-config/features=PackedStringArray("4.6", "Forward Plus")
+config/features=PackedStringArray("4.7", "Forward Plus")
 boot_splash/image="uid://ddytfgogyx2i4"
 config/icon="uid://ddytfgogyx2i4"
 
@@ -27,8 +27,6 @@ Global="*uid://cx8gfyx1qij2j"
 
 [display]
 
-window/size/viewport_width=1920
-window/size/viewport_height=1080
 window/size/mode=3
 window/stretch/scale_mode="integer"
 
