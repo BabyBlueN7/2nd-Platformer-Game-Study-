@@ -14,14 +14,14 @@
 [ext_resource type="PackedScene" uid="uid://3f4fhtw31d1d" path="res://Scenes/Slime2.tscn" id="9_vvw82"]
 [ext_resource type="PackedScene" uid="uid://cm3m0jfd2ctac" path="res://Scenes/Areas/final_scene.tscn" id="13_l10og"]
 
-[sub_resource type="Curve2D" id="Curve2D_q6ryo"]
+[sub_resource type="Curve2D" id="Curve2D_l10og"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -52)
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_nluo6"]
+[sub_resource type="Curve2D" id="Curve2D_q6ryo"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -27.917236, 10.867798, 0, 0, 0, 0, 544, 8)
@@ -81,12 +81,12 @@ camera_limit_bottom = 360
 
 [node name="MovingPlatform" parent="Platforms" parent_id_path=PackedInt32Array(357845866) index="0" unique_id=1534847317 instance=ExtResource("6_gi6is")]
 position = Vector2(1120, 304)
-curve = SubResource("Curve2D_q6ryo")
+curve = SubResource("Curve2D_l10og")
 path_time = 0.2
 
 [node name="MovingPlatform2" parent="Platforms" parent_id_path=PackedInt32Array(357845866) index="1" unique_id=89517949 instance=ExtResource("6_gi6is")]
 position = Vector2(3480, 200)
-curve = SubResource("Curve2D_nluo6")
+curve = SubResource("Curve2D_q6ryo")
 path_time = 6.0
 
 [node name="Platform" parent="Platforms" parent_id_path=PackedInt32Array(357845866) index="2" unique_id=2054403802 instance=ExtResource("7_dj4iv")]
