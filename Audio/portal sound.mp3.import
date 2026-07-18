@@ -2,7 +2,7 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-uid="uid://bvotedrr1roj5"
+uid="uid://cpsirb2hpkhft"
 path="res://.godot/imported/portal sound.mp3-527c39ca3ce005027f30a7833ba4baed.mp3str"
 
 [deps]
@@ -12,8 +12,8 @@ dest_files=["res://.godot/imported/portal sound.mp3-527c39ca3ce005027f30a7833ba4
 
 [params]
 
-loop=true
-loop_offset=0.0
-bpm=0.0
+loop=false
+loop_offset=0
+bpm=0
 beat_count=0
 bar_beats=4

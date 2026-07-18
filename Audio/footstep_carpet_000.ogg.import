@@ -2,7 +2,7 @@
 
 importer="oggvorbisstr"
 type="AudioStreamOggVorbis"
-uid="uid://cenmfrs11ohny"
+uid="uid://bb85lqev4oreo"
 path="res://.godot/imported/footstep_carpet_000.ogg-a4cd33ded80a9e016f788dcab2b9049f.oggvorbisstr"
 
 [deps]
@@ -12,8 +12,8 @@ dest_files=["res://.godot/imported/footstep_carpet_000.ogg-a4cd33ded80a9e016f788
 
 [params]
 
-loop=true
-loop_offset=0.0
-bpm=0.0
+loop=false
+loop_offset=0
+bpm=0
 beat_count=0
 bar_beats=4

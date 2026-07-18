@@ -13,8 +13,8 @@ config_version=5
 config/name="Knight Dasher"
 run/main_scene="uid://ca71ov3h6t0u8"
 config/features=PackedStringArray("4.7", "Forward Plus")
-boot_splash/image="uid://ddytfgogyx2i4"
-config/icon="uid://ddytfgogyx2i4"
+boot_splash/image="uid://db0yaxgeqx5fx"
+config/icon="uid://db0yaxgeqx5fx"
 
 [audio]
 
