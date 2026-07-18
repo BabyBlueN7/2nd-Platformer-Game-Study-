@@ -186,8 +186,18 @@ func start_dash():
 func die():
 	is_dead = true
 	set_process_input(false)
+	
 	# Count this death
 	Global.add_death()
+	
+	# --- ADDED: REVERT COINS COLLECTED IN THIS RUN ---
+	var gm = get_tree().get_first_node_in_group("game_manager")
+	if gm and gm.has_method("get_coins_collected_this_run"):
+		Global.score -= gm.get_coins_collected_this_run()
+		if Global.score < 0:
+			Global.score = 0
+	# -------------------------------------------------
+	
 	# Play death SFX
 	AudioManager.play_death()
 	
